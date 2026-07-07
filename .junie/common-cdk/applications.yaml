@@ -11,4 +11,4 @@ Sources:
     ArgoSyncWave: 1
     Repository: oci://europe-docker.pkg.dev/prc-registry-180d/charts
     Chart: fhir
-    Version: 1.4.2
+    Version: v1.0.0
