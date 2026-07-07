@@ -1,8 +1,0 @@
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-resources:
-- ../../base
-namespace: guestbook-simple-dev
-images:
-- name: ghcr.io/gemas/guestbook
-  newTag: v1.0.0
