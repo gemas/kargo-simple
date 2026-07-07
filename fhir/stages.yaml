@@ -12,8 +12,11 @@ spec:
         name: fhir-warehouse
       sources:
         direct: true
+      autoPromotionOptions:
+        selectionPolicy: NewestFreight
   promotionTemplate:
     spec:
       steps:
         - task:
+            kind: PromotionTask
             name: promote
