@@ -5,30 +5,30 @@ metadata:
   namespace: fhir
 spec:
   vars:
-  - name: repoURL
-    value: https://github.com/gemas/kargo-simple.git
-  - name: branch
-    value: main
-  - name: image
-    value: ghcr.io/gemas/guestbook
+    - name: repoURL
+      value: https://github.com/gemas/kargo-simple.git
+    - name: branch
+      value: main
+    - name: image
+      value: ghcr.io/gemas/guestbook
   steps:
-  - uses: git-clone
-    config:
-      repoURL: ${{ vars.repoURL }}
-      checkout:
-      - branch: ${{ vars.branch }}
+    - uses: git-clone
+      config:
+        repoURL: ${{ vars.repoURL }}
+        checkout:
+          - branch: ${{ vars.branch }}
+            path: ./src
+    - uses: yaml-update
+      as: update-yaml
+      config:
+        path: ./src/common-cdk/applications.yaml
+        updates:
+          - key: Sources.fhir.Version
+            value: ${{ imageFrom(vars.image).Tag }}
+    - uses: git-commit
+      config:
         path: ./src
-  - uses: yaml-update
-    as: update-yaml
-    config:
-      path: ./src/.junie/common-cdk/applications.yaml
-      updates:
-      - key: Sources.fhir.Version
-        value: ${{ imageFrom(vars.image).Tag }}
-  - uses: git-commit
-    config:
-      path: ./src
-      message: "Update fhir version to ${{ imageFrom(vars.image).Tag }}"
-  - uses: git-push
-    config:
-      path: ./src
+        message: "Update fhir version to ${{ imageFrom(vars.image).Tag }}"
+    - uses: git-push
+      config:
+        path: ./src
