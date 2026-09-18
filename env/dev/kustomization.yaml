@@ -5,4 +5,4 @@ resources:
 namespace: guestbook-simple-dev
 images:
 - name: ghcr.io/gemas/guestbook
-  newTag: v1.0.7
+  newTag: v1.0.6
